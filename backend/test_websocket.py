@@ -1,4 +1,6 @@
 import asyncio
+import json
+
 import websockets
 
 
@@ -11,7 +13,9 @@ async def test_websocket():
         response = await websocket.recv()
         print("Server:", response)
 
-        await websocket.send("Hello Auralis")
+        await websocket.send(json.dumps({
+            "type": "ping"
+        }))
 
         response = await websocket.recv()
         print("Server:", response)
