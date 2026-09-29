@@ -52,6 +52,12 @@ async def websocket_endpoint(websocket: WebSocket):
                     "bytes_received": session.audio_bytes_received,
                 })
 
+            elif message_type == "session_state":
+                await websocket.send_json({
+                    "type": "session_state",
+                    "session": session.to_dict(),
+                })
+
             elif message_type == "ping":
                 await websocket.send_json({
                     "type": "pong",
